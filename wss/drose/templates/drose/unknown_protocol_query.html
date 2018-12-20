@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+  <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" >未知协议查询
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'drose:主页' %}">返回主页</a></li>
+            </ul>
+        </div>
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="unknown" >
+        <button type="submit">提交</button>
+    </form>
+<br>
+    <h3>查询结果:</h3>
+    <p>暂无数据</p>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" >物联网搜索引擎
+                </a>
+                <button class="navbar-toggle collapsed" data-toggle="
+                collapse" data-target="#navber-collapse" >
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar-collapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li><a href="/admin">用户管理</a></li>
+                            <li><a href="{% url 'drose:人工标注指纹' %}">人工标注指纹</a></li>
+                            <li><a href="{% url 'drose:先验指纹查询' %}">先验指纹查询</a></li>
+                            <li><a href="{% url 'drose:未知协议查询' %}">未知协议查询</a></li>
+                            <li><a href="{% url 'drose:扫描管理' %}">扫描管理</a></li>
+                            <li><a href="{% url 'drose:登出' %}">登出</a></li>
+                        {% else %}
+                            <li><a href="{% url 'drose:个人中心' %}">个人中心</a></li>
+                            <li><a href="{% url 'drose:使用说明' %}">使用说明</a></li>
+                            <li><a href="{% url 'drose:登出' %}">登出</a></li>
+                        {% endif %}
+                    {% else %}
+                            <li><a href="{% url 'drose:主页' %}">主页</a></li>
+                            <li><a href="{% url 'drose:登录' %}">登录</a></li>
+                            <li><a href="{% url 'drose:注册' %}">注册</a></li>
+                    {% endif %}
+
+                </ul>
+                </div>
+        </div>
+    </div>
+    <form action="" method = "post">
+    {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group" style="text-align:center;ertical-align:middle;">
+              <input type="text" class="form-control" placeholder="Search for..." name="q" maxlength="50">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </form>
+    <br>
+    <h3>搜索结果:</h3>
+    {% if data %}
+        {% for item in data %}
+        <p>{{ item }}</p>
+        {% endfor %}
+    {% else %}
+        <p>暂无数据</p>
+    {% endif %}
+</body>
+</html>

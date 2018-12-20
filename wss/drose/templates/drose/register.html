@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+  <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" >注册
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'drose:主页' %}">返回主页</a></li>
+            </ul>
+        </div>
+    </div>
+     <form action="" method="POST">
+         {% csrf_token %}
+         <p>
+             <label for="id_username">用户名:</label>
+             <input name="username" id="id_username" autofocus="" required="" type="text" maxlength="150">
+             <span class="helptext">必填。150个字符或者更少。包含字母，数字和仅有的@/./+/-/_符号。</span>
+         </p>
+         {% if 注册表单.errors.username %}
+         {{ 注册表单.errors.username }}
+         {% endif %}
+         <p>
+             <label for="id_password1">密码:</label>
+             <input name="password1" id="id_password1" required="" type="password">
+             <span class="helptext">
+                 <ul>
+                     <li>你的密码不能与其他个人信息太相似。</li>
+                     <li>你的密码必须包含至少 8 个字符。</li>
+                     <li>你的密码不能是大家都爱用的常见密码。</li>
+                     <li>你的密码不能全部为数字。</li>
+                 </ul>
+             </span>
+         </p>
+         {{ 注册表单.errors.password1 }}
+         <p>
+             <label for="id_password2">密码确认:</label>
+             <input name="password2" id="id_password2" required="" type="password">
+             <span class="helptext">为了校验，请输入与上面相同的密码。</span>
+         </p>
+         {{ 注册表单.errors.password2 }}
+         <p>
+             <label for="id_email">电子邮件地址:</label>
+             <input name="email" id="id_email" type="email" maxlength="254">
+         </p>
+         {{ 注册表单.errors.email }}
+         <p>
+             <label for="id_昵称">昵称:</label>
+             <input name="昵称" id="id_昵称" type="text" maxlength="50">
+         </p>
+         {{ 注册表单.errors.昵称 }}
+         <p>
+             <label for="id_生日">生日:</label>
+             <input name="生日" id="id_生日" type="date">
+         </p>
+         {{ 注册表单.errors.生日 }}
+         {{ 注册表单.验证码 }}
+         {{ 注册表单.errors.验证码 }}
+         <button type="submit">注册</button>
+     </form>
+</body>
+</html>
