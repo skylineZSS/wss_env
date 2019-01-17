@@ -161,7 +161,7 @@ def 扫描管理(请求):
         ip = 请求.POST['ip']
         port = 请求.POST['port']
         print(ip, port)
-        Arguments = '-Pn -sS -T4 --script=banner -O'
+        Arguments = '-Pn -sV -T5 --script=banner -O '
         scanNetwork(ip, port, Arguments)
     # 内容 = {'改密表单': 改密表单, '用户': 请求.user}
 

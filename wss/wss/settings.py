@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'drose',
     # 'captcha',
     'drose.collector',
+    'data_show'
 ]
 
 MIDDLEWARE = [
